@@ -89,8 +89,8 @@ mlp = MLPClassifier(verbose=True,    # default=False imprime mensagens de progre
                     # early_stopping=<bool>, default=False
 
 #%% Treinamento da rede
-mlp.fit(X,y)
-#mlp.fit(X_train, y_train)
+#mlp.fit(X,y)
+mlp.fit(X_train, y_train)
 
 #%% Teste
 #entrada = pd.DataFrame([[ 88.0, 6.5, 70.2, 5.5, 48.07, 4.0, 66.0, 5.99, 32.3, 3.55]],) # dados ficticios
@@ -100,15 +100,15 @@ input('Aperte uma tecla para continuar:')
 
 #%% DESEMPENHO SOBRE O CONJUNTO DE TESTE
 # previsões
-###y_pred = mlp.predict(X_test)
-#print(y_pred.dtype, ' vetor de previsoes = ', y_pred)
-#input('Aperte uma tecla para continuar:')
+y_pred = mlp.predict(X_test)
+print(y_pred.dtype, ' vetor de previsoes = ', y_pred)
+input('Aperte uma tecla para continuar:')
 
 # desempenho do modelo
-###accuracy = accuracy_score(y_test, y_pred)
-###print("\nAcurácia:", accuracy)   # soma dos acertos / nº dados de teste
-###print("Erro = ", mlp.loss_)    # fator de perda (erro)
-###input('Aperte uma tecla para continuar:')
+accuracy = accuracy_score(y_test, y_pred)
+print("\nAcurácia:", accuracy)   # soma dos acertos / nº dados de teste
+print("Erro = ", mlp.loss_)    # fator de perda (erro)
+input('Aperte uma tecla para continuar:')
 
 
 # -----------------------------------------------------------------------------------------------------------------
@@ -118,34 +118,34 @@ input('Aperte uma tecla para continuar:')
 from sklearn.metrics import confusion_matrix
 
 # Calcular a matriz de confusão
-###matriz_confusao = confusion_matrix(y_test, y_pred)
+matriz_confusao = confusion_matrix(y_test, y_pred)
 
 # Imprimir a matriz de confusão
-###print("Matriz de Confusão:")
-###print(matriz_confusao)
+print("Matriz de Confusão:")
+print(matriz_confusao)
 
 import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay
 
-###cm = confusion_matrix(y_test, y_pred, labels=mlp.classes_)
+cm = confusion_matrix(y_test, y_pred, labels=mlp.classes_)
 
-###display = ConfusionMatrixDisplay(confusion_matrix=cm,
-###                              display_labels=mlp.classes_)
-###display.plot()
-###plt.show()
+display = ConfusionMatrixDisplay(confusion_matrix=cm,
+                              display_labels=mlp.classes_)
+display.plot()
+plt.show()
 
 # -----------------------------------------------------------------------------------------------------------------
 
-# for tam_camada_oculta in [(20,), (50,), (100,), (200,), (10, 10), (20, 20), (50, 50)]:
-#     mlp = MLPClassifier(hidden_layer_sizes = tam_camada_oculta, 
-#                     max_iter=2000,   # default=200
-#                     tol=1e-6,       # default=1e-4
-#                     learning_rate='adaptive', # default 'constant'
-#                     activation='relu')   # default 'relu' estava 'logistic'
-#     mlp.fit(X_train, y_train)
-#     y_pred = mlp.predict(X_test)
-#     accuracy = accuracy_score(y_test, y_pred)
-#     print("\nAcurácia com ", mlp.hidden_layer_sizes, " neurons:", accuracy)
+for tam_camada_oculta in [(20,), (50,), (100,), (200,), (10, 10), (20, 20), (50, 50)]:
+    mlp = MLPClassifier(hidden_layer_sizes = tam_camada_oculta, 
+                    max_iter=2000,   # default=200
+                    tol=1e-6,       # default=1e-4
+                    learning_rate='adaptive', # default 'constant'
+                    activation='relu')   # default 'relu' estava 'logistic'
+    mlp.fit(X_train, y_train)
+    y_pred = mlp.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    print("\nAcurácia com ", mlp.hidden_layer_sizes, " neurons:", accuracy)
 
 # -----------------------------------------------------------------------------------------------------------------
     #%% Parâmetros da rede

@@ -14,6 +14,7 @@ python -m venv birds_env
 ```bash
 cd birds_env/Scripts
 activate
+cd../../
 ```
 
 ## Instalar as bibliotecas utilizadas:
